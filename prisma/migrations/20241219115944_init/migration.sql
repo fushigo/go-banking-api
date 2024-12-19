@@ -1,13 +1,15 @@
 -- CreateTable
 CREATE TABLE `Karyawan` (
     `id_karyawan` INTEGER NOT NULL AUTO_INCREMENT,
-    `nomorPegawai` INTEGER NOT NULL,
+    `nomorKaryawan` INTEGER NOT NULL,
     `namaKaryawan` VARCHAR(191) NOT NULL,
+    `username` VARCHAR(191) NOT NULL,
+    `password` VARCHAR(191) NOT NULL,
     `role` ENUM('SuperAdmin', 'Admin', 'Karyawan') NOT NULL DEFAULT 'Karyawan',
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
-    UNIQUE INDEX `Karyawan_nomorPegawai_key`(`nomorPegawai`),
+    UNIQUE INDEX `Karyawan_nomorKaryawan_key`(`nomorKaryawan`),
     PRIMARY KEY (`id_karyawan`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -32,6 +34,9 @@ CREATE TABLE `Rekening` (
     `id_rekening` INTEGER NOT NULL AUTO_INCREMENT,
     `nomorRekening` INTEGER NOT NULL,
     `jenisRekening` ENUM('Tabungan', 'Giro', 'Deposito') NOT NULL DEFAULT 'Tabungan',
+    `jenisTabungan` ENUM('GoSilver', 'GoPlatinum', 'GoPriority') NULL,
+    `totalDana` DECIMAL(65, 30) NOT NULL,
+    `bonusBunga` DECIMAL(65, 30) NOT NULL,
     `id_nasabah` INTEGER NOT NULL,
     `pin` INTEGER NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
@@ -40,19 +45,6 @@ CREATE TABLE `Rekening` (
     UNIQUE INDEX `Rekening_nomorRekening_key`(`nomorRekening`),
     UNIQUE INDEX `Rekening_pin_key`(`pin`),
     PRIMARY KEY (`id_rekening`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `RekeningDetail` (
-    `id_rekening_detail` INTEGER NOT NULL AUTO_INCREMENT,
-    `totalDana` DECIMAL(65, 30) NOT NULL,
-    `bonusBunga` DECIMAL(65, 30) NOT NULL,
-    `id_rekening` INTEGER NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
-
-    UNIQUE INDEX `RekeningDetail_id_rekening_key`(`id_rekening`),
-    PRIMARY KEY (`id_rekening_detail`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
@@ -80,9 +72,6 @@ CREATE TABLE `LogActivity` (
 
 -- AddForeignKey
 ALTER TABLE `Rekening` ADD CONSTRAINT `Rekening_id_nasabah_fkey` FOREIGN KEY (`id_nasabah`) REFERENCES `Nasabah`(`id_nasabah`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `RekeningDetail` ADD CONSTRAINT `RekeningDetail_id_rekening_fkey` FOREIGN KEY (`id_rekening`) REFERENCES `Rekening`(`id_rekening`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `RekeningActivity` ADD CONSTRAINT `RekeningActivity_id_rekening_fkey` FOREIGN KEY (`id_rekening`) REFERENCES `Rekening`(`id_rekening`) ON DELETE CASCADE ON UPDATE CASCADE;
