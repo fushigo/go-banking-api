@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "@prisma/client": "^6.1.0",
+    "@types/dotenv": "^6.1.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "prisma": "^6.1.0",
+    "typescript": "^5.7.2"
+  },
+  "name": "rest-api",
+  "version": "1.0.0",
+  "description": "GoBanking Rest Api developt using Typescript and Express",
+  "main": "src/index.ts",
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc --watch",
+    "start": "node dist/src/index.js"
+  },
+  "author": "Rizky Andika Sukma",
+  "license": "ISC"
+}

@@ -1,0 +1,87 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url = env("DATABASE_URL")
+}
+
+model Karyawan {
+    id_karyawan Int @id @default(autoincrement())
+    nomorKaryawan Int @unique
+    namaKaryawan String
+    username String
+    password String
+    role RoleKaryawan @default(Karyawan)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    logActivity LogActivity[]
+}
+
+model Nasabah {
+    id_nasabah Int @id @default(autoincrement())
+    nik String @unique
+    namaLengkap String
+    email String @unique
+    nomorTelepone String @unique
+    createdAt DateTime @default(now())
+    updateAt DateTime @updatedAt
+    rekening Rekening[]
+}
+
+model Rekening {
+    id_rekening Int @id @default(autoincrement())
+    nomorRekening Int @unique
+    jenisRekening JenisRekening @default(Tabungan)
+    jenisTabungan JenisTabungan?
+    totalDana Decimal
+    bonusBunga Decimal
+    id_nasabah Int
+    pin Int? @unique
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    nasabah Nasabah @relation(fields: [id_nasabah], references: [id_nasabah], onDelete: Cascade)
+    rekeningActivity RekeningActivity[]
+}
+model RekeningActivity {
+    id_rekening_activity Int @id @default(autoincrement())
+    jenisActivity JenisActivity
+    jumlahDana Decimal
+    id_rekening Int
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    rekening Rekening @relation(fields: [id_rekening], references: [id_rekening], onDelete: Cascade)
+}
+
+model LogActivity {
+    id_log_activity Int @id @default(autoincrement())
+    operation String
+    id_karyawan Int
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    karyawan Karyawan @relation(fields: [id_karyawan], references: [id_karyawan], onDelete: Cascade)
+}
+
+enum JenisRekening {
+    Tabungan
+    Giro
+    Deposito
+}
+
+enum RoleKaryawan {
+    SuperAdmin
+    Admin
+    Karyawan
+}
+
+enum JenisActivity {
+    DanaKeluar
+    DanaMasuk
+}
+
+enum JenisTabungan {
+    GoSilver
+    GoPlatinum
+    GoPriority
+}
