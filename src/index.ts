@@ -17,6 +17,7 @@ app.get("/", (req: Request, res: Response) => {
   res.status(200).send("Welcome to the GoBanking API!");
 });
 
+// Routes
 app.use("/api/nasabah", nasabahRoutes());
 app.use("/api/karyawan", karyawanRoutes());
 app.use("/api/rekening", rekeningRoutes());
