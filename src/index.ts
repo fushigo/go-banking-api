@@ -18,10 +18,10 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 // Routes
-app.use("/api/nasabah", nasabahRoutes());
-app.use("/api/karyawan", karyawanRoutes());
-app.use("/api/rekening", rekeningRoutes());
-app.use("/api/rekening-activity", rekeningActivityRoutes());
-app.use("/api/log-activity", logActivityRoutes());
+app.use("/nasabah", nasabahRoutes());
+app.use("/karyawan", karyawanRoutes());
+app.use("/rekening", rekeningRoutes());
+app.use("/rekening-activity", rekeningActivityRoutes());
+app.use("/log-activity", logActivityRoutes());
 
 app.listen(port, () => console.log("Server is running on port: ", port));
