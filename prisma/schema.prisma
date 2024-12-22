@@ -34,7 +34,6 @@ model Nasabah {
 model Rekening {
     id_rekening Int @id @default(autoincrement())
     nomorRekening Int @unique
-    jenisRekening JenisRekening @default(Tabungan)
     jenisTabungan JenisTabungan?
     totalDana Decimal
     bonusBunga Decimal
@@ -62,12 +61,6 @@ model LogActivity {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     karyawan Karyawan @relation(fields: [id_karyawan], references: [id_karyawan], onDelete: Cascade)
-}
-
-enum JenisRekening {
-    Tabungan
-    Giro
-    Deposito
 }
 
 enum RoleKaryawan {

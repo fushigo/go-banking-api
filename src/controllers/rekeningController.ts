@@ -51,7 +51,6 @@ export const createRekening = async (
     const data = await prisma.rekening.create({
       data: {
         nomorRekening: dto.nomorRekening,
-        jenisRekening: dto.jenisRekening,
         jenisTabungan: dto.jenisTabungan,
         totalDana: dto.totalDana,
         bonusBunga: dto.bonusBunga,
@@ -79,7 +78,6 @@ export const updateRekening = async (
       where: { id_rekening: Number(id) },
       data: {
         nomorRekening: dto.nomorRekening,
-        jenisRekening: dto.jenisRekening,
         jenisTabungan: dto.jenisTabungan,
         totalDana: dto.totalDana,
         bonusBunga: dto.bonusBunga,
