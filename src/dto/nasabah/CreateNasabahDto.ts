@@ -3,4 +3,5 @@ export class CreateNasabahDto {
   namaLengkap!: string;
   email!: string;
   nomorTelepone!: string;
+  jenisKelamin!: "pria" | "wanita";
 }

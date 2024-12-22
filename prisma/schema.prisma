@@ -25,6 +25,7 @@ model Nasabah {
     namaLengkap String
     email String @unique
     nomorTelepone String @unique
+    jenisKelamin JenisKelamin
     createdAt DateTime @default(now())
     updateAt DateTime @updatedAt
     rekening Rekening[]
@@ -84,4 +85,9 @@ enum JenisTabungan {
     GoSilver
     GoPlatinum
     GoPriority
+}
+
+enum JenisKelamin {
+    wanita
+    pria
 }

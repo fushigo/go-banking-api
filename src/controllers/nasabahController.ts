@@ -57,6 +57,7 @@ export const createNasabah = async (
         email: dto.email,
         namaLengkap: dto.namaLengkap,
         nomorTelepone: dto.nomorTelepone,
+        jenisKelamin: dto.jenisKelamin,
       },
     });
 
@@ -82,6 +83,7 @@ export const updateNasabah = async (
         email: dto.email,
         namaLengkap: dto.nik,
         nomorTelepone: dto.nomorTelepone,
+        jenisKelamin: dto.jenisKelamin,
       },
     });
 
