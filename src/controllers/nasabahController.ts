@@ -12,6 +12,9 @@ export const getAllNasabah = async (
       orderBy: {
         createdAt: "desc",
       },
+      include: {
+        rekening: true,
+      },
     });
 
     res
