@@ -3,6 +3,7 @@ import {
   deleteNasabah,
   getAllNasabah,
   getNasabahById,
+  getNasabahByNik,
   updateNasabah,
 } from "../controllers/nasabahController";
 import express from "express";
@@ -15,6 +16,9 @@ export default function nasabahRoutes() {
   router.post("/", createNasabah);
   router.patch("/:id", updateNasabah);
   router.delete("/:id", deleteNasabah);
+
+  //GET BY NIK
+  router.get("/:nik", getNasabahByNik);
 
   return router;
 }

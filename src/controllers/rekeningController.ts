@@ -32,6 +32,7 @@ export const getRekeningById = async (
   try {
     const data = await prisma.rekening.findUnique({
       where: { id_rekening: Number(id) },
+      include: { rekeningActivity: true },
     });
 
     res.status(200).json({ message: "Success collected data", data });

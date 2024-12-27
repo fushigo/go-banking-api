@@ -111,3 +111,22 @@ export const deleteNasabah = async (
     res.status(500).json({ message: "internal server error" });
   }
 };
+
+export const getNasabahByNik = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const { nik } = req.params;
+
+  try {
+    const data = await prisma.nasabah.findUnique({
+      where: { nik },
+      include: { rekening: true },
+    });
+
+    res.status(200).json({ message: "Success collected data", data });
+  } catch (error) {
+    console.log("Error while collecting nasabah data ", error);
+    res.status(500).json({ message: "internal server error" });
+  }
+};
