@@ -18,7 +18,7 @@ export default function nasabahRoutes() {
   router.delete("/:id", deleteNasabah);
 
   //GET BY NIK
-  router.get("/:nik", getNasabahByNik);
+  router.get("/nik/:nik", getNasabahByNik);
 
   return router;
 }
