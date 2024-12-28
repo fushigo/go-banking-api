@@ -111,3 +111,22 @@ export const deleteRekening = async (
     res.status(500).json({ message: "internal server error" });
   }
 };
+
+//GET REKENING BY NOREK
+export const getRekeningByNomorRekening = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const { norek } = req.params;
+  try {
+    const data = await prisma.rekening.findUnique({
+      where: { nomorRekening: Number(norek) },
+      include: { rekeningActivity: true },
+    });
+
+    res.status(200).json({ message: "Success collected data", data });
+  } catch (error) {
+    console.log("Error while collecting rekening data: ", error);
+    res.status(500).json({ message: "internal server error" });
+  }
+};

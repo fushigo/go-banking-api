@@ -4,6 +4,7 @@ import {
   deleteRekening,
   getAllRekening,
   getRekeningById,
+  getRekeningByNomorRekening,
   updateRekening,
 } from "../controllers/rekeningController";
 
@@ -15,6 +16,9 @@ export default function rekeningRoutes() {
   router.post("/", createRekening);
   router.patch("/:id", updateRekening);
   router.delete("/:id", deleteRekening);
+
+  //GET BY NOREK
+  router.get("/norek/:norek", getRekeningByNomorRekening);
 
   return router;
 }
