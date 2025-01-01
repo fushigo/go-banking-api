@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import prisma from "../../prisma/client";
 import { CreateRekeningDto } from "../dto/rekening/CreateRekeningDto";
 import { UpdateRekeningDto } from "../dto/rekening/UpdateRekeningDto";
+import { CreateNasabahDto } from "../dto/nasabah/CreateNasabahDto";
 
 export const getAllRekening = async (
   req: Request,
@@ -56,7 +57,7 @@ export const createRekening = async (
         totalDana: dto.totalDana,
         bonusBunga: dto.bonusBunga,
         id_nasabah: dto.idNasabah,
-        pin: dto.pin,
+        pin: Number(dto.pin),
       },
     });
 
@@ -83,7 +84,7 @@ export const updateRekening = async (
         totalDana: dto.totalDana,
         bonusBunga: dto.bonusBunga,
         id_nasabah: dto.idNasabah,
-        pin: dto.pin,
+        pin: Number(dto.pin),
       },
     });
 
@@ -127,6 +128,44 @@ export const getRekeningByNomorRekening = async (
     res.status(200).json({ message: "Success collected data", data });
   } catch (error) {
     console.log("Error while collecting rekening data: ", error);
+    res.status(500).json({ message: "internal server error" });
+  }
+};
+
+// CREATE REKENING INCLUDE NASABAH
+export const createRekeningIncUser = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const {
+      nasabahDto,
+      rekeningDto,
+    }: { nasabahDto: CreateNasabahDto; rekeningDto: CreateRekeningDto } =
+      req.body;
+
+    const data = await prisma.nasabah.create({
+      data: {
+        email: nasabahDto.email,
+        jenisKelamin: nasabahDto.jenisKelamin,
+        namaLengkap: nasabahDto.namaLengkap,
+        nik: nasabahDto.nik,
+        nomorTelepone: nasabahDto.nomorTelepone,
+        rekening: {
+          create: {
+            nomorRekening: rekeningDto.nomorRekening,
+            jenisTabungan: rekeningDto.jenisTabungan,
+            pin: Number(rekeningDto.pin),
+            bonusBunga: rekeningDto.bonusBunga,
+            totalDana: rekeningDto.totalDana,
+          },
+        },
+      },
+    });
+
+    res.status(200).json({ message: "Success created data", data });
+  } catch (error) {
+    console.log("Error while creating rekening data: ", error);
     res.status(500).json({ message: "internal server error" });
   }
 };

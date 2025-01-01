@@ -20,5 +20,8 @@ export default function rekeningRoutes() {
   //GET BY NOREK
   router.get("/norek/:norek", getRekeningByNomorRekening);
 
+  //CREATE NEW DATA INCLUDE USER
+  
+
   return router;
 }
