@@ -1,6 +1,7 @@
 import express from "express";
 import {
   createRekening,
+  createRekeningIncUser,
   deleteRekening,
   getAllRekening,
   getRekeningById,
@@ -21,7 +22,7 @@ export default function rekeningRoutes() {
   router.get("/norek/:norek", getRekeningByNomorRekening);
 
   //CREATE NEW DATA INCLUDE USER
-  
+  router.post("/newrek", createRekeningIncUser);
 
   return router;
 }
