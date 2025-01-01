@@ -93,11 +93,6 @@ export const deleteKaryawan = async (
   req: Request,
   res: Response
 ): Promise<void> => {
-  if (req.method != "POST") {
-    res.status(405).json({ message: "Method not allowed" });
-    return;
-  }
-
   const { id } = req.params;
 
   try {
