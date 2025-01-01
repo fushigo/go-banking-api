@@ -56,7 +56,7 @@ export const createRekening = async (
         jenisTabungan: dto.jenisTabungan,
         totalDana: dto.totalDana,
         bonusBunga: dto.bonusBunga,
-        id_nasabah: dto.idNasabah,
+        id_nasabah: dto.idNasabah!,
         pin: Number(dto.pin),
       },
     });
