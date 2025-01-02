@@ -1,5 +1,5 @@
 export class CreateRekeningDto {
-  nomorRekening!: number;
+  nomorRekening!: string;
   jenisTabungan?: "GoSilver" | "GoPlatinum" | "GoPriority";
   totalDana!: number;
   bonusBunga!: number;

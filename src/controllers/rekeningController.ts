@@ -52,7 +52,7 @@ export const createRekening = async (
   try {
     const data = await prisma.rekening.create({
       data: {
-        nomorRekening: Number(dto.nomorRekening),
+        nomorRekening: dto.nomorRekening,
         jenisTabungan: dto.jenisTabungan,
         totalDana: dto.totalDana,
         bonusBunga: dto.bonusBunga,
@@ -79,7 +79,7 @@ export const updateRekening = async (
     const data = await prisma.rekening.update({
       where: { id_rekening: Number(id) },
       data: {
-        nomorRekening: Number(dto.nomorRekening),
+        nomorRekening: dto.nomorRekening,
         jenisTabungan: dto.jenisTabungan,
         totalDana: dto.totalDana,
         bonusBunga: dto.bonusBunga,
@@ -126,7 +126,7 @@ export const getRekeningByNomorRekening = async (
   const { norek } = req.params;
   try {
     const data = await prisma.rekening.findUnique({
-      where: { nomorRekening: Number(norek) },
+      where: { nomorRekening: norek },
       include: { rekeningActivity: true },
     });
 
@@ -158,7 +158,7 @@ export const createRekeningIncUser = async (
         nomorTelepone: nasabahDto.nomorTelepone,
         rekening: {
           create: {
-            nomorRekening: Number(rekeningDto.nomorRekening),
+            nomorRekening: rekeningDto.nomorRekening,
             jenisTabungan: rekeningDto.jenisTabungan,
             pin: Number(rekeningDto.pin),
             bonusBunga: rekeningDto.bonusBunga,

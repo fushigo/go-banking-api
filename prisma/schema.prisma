@@ -33,7 +33,7 @@ model Nasabah {
 
 model Rekening {
     id_rekening Int @id @default(autoincrement())
-    nomorRekening Int @unique
+    nomorRekening String @unique
     jenisTabungan JenisTabungan?
     totalDana Decimal
     bonusBunga Decimal
