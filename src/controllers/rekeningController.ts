@@ -173,6 +173,8 @@ export const createRekeningIncUser = async (
       .json({ statusCode: 201, message: "Success created data", data });
   } catch (error) {
     console.log("Error while creating rekening data: ", error);
-    res.status(500).json({ statusCode: 500, message: "internal server error" });
+    res
+      .status(500)
+      .json({ statusCode: 500, message: "internal server error", error });
   }
 };
