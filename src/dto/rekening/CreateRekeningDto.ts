@@ -3,6 +3,6 @@ export class CreateRekeningDto {
   jenisTabungan?: "GoSilver" | "GoPlatinum" | "GoPriority";
   totalDana!: number;
   bonusBunga!: number;
-  idNasabah!: number;
+  idNasabah!: number | undefined;
   pin!: number;
 }
