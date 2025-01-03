@@ -118,11 +118,6 @@ export const getRekeningByNomorRekening = async (
   req: Request,
   res: Response
 ): Promise<void> => {
-  if (req.method != "POST") {
-    res.status(405).json({ message: "Method not allowed" });
-    return;
-  }
-
   const { norek } = req.params;
   try {
     const data = await prisma.rekening.findUnique({
@@ -142,6 +137,11 @@ export const createRekeningIncUser = async (
   req: Request,
   res: Response
 ): Promise<void> => {
+  if (req.method != "POST") {
+    res.status(405).json({ message: "Method not allowed" });
+    return;
+  }
+
   try {
     const {
       nasabahDto,
