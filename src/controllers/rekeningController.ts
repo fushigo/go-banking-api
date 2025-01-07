@@ -206,7 +206,7 @@ export const transferRekening = async (
       return;
     }
 
-    if (rekSender.totalDana < nominalTf) {
+    if (Number(rekSender.totalDana) < Number(nominalTf)) {
       res.status(400).json({ statusCode: 400, message: "Insufficient funds" });
       return;
     }
