@@ -178,3 +178,69 @@ export const createRekeningIncUser = async (
       .json({ statusCode: 500, message: "internal server error", error });
   }
 };
+
+// Transfer
+export const transferRekening = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const { rekSend, rekReceive, nominalTf, pin } = req.body;
+
+    // Validasi input
+    if (!rekSend || !rekReceive || !nominalTf || !pin) {
+      res.status(400).json({ statusCode: 400, message: "Invalid input" });
+      return;
+    }
+
+    // Ambil data pengirim
+    const rekSender = await prisma.rekening.findUnique({
+      where: { nomorRekening: rekSend },
+    });
+
+    if (!rekSender || Number(pin) !== rekSender.pin) {
+      res.status(400).json({
+        statusCode: 400,
+        message: "Invalid PIN or sender account not found",
+      });
+      return;
+    }
+
+    if (rekSender.totalDana < nominalTf) {
+      res.status(400).json({ statusCode: 400, message: "Insufficient funds" });
+      return;
+    }
+
+    // Update saldo pengirim
+    await prisma.rekening.update({
+      where: { nomorRekening: rekSender.nomorRekening },
+      data: { totalDana: Number(rekSender.totalDana) - Number(nominalTf) },
+    });
+
+    // Ambil data penerima
+    const rekReceiver = await prisma.rekening.findUnique({
+      where: { nomorRekening: rekReceive },
+    });
+
+    if (!rekReceiver) {
+      res
+        .status(404)
+        .json({ statusCode: 404, message: "Receiver data not found" });
+      return;
+    }
+
+    // Update saldo penerima
+    await prisma.rekening.update({
+      where: { nomorRekening: rekReceive },
+      data: { totalDana: Number(rekSender.totalDana) + Number(nominalTf) },
+    });
+
+    // Berhasil
+    res.status(200).json({ statusCode: 200, message: "Transfer successful" });
+  } catch (error) {
+    console.error("Error while processing transfer:", error);
+    res
+      .status(500)
+      .json({ statusCode: 500, message: "Internal server error", error });
+  }
+};
