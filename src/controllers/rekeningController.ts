@@ -231,8 +231,8 @@ export const transferRekening = async (
 
     // Update saldo penerima
     await prisma.rekening.update({
-      where: { nomorRekening: rekReceive },
-      data: { totalDana: Number(rekSender.totalDana) + Number(nominalTf) },
+      where: { nomorRekening: rekReceiver.nomorRekening },
+      data: { totalDana: Number(rekReceiver.totalDana) + Number(nominalTf) },
     });
 
     // Berhasil
