@@ -130,3 +130,35 @@ export const getNasabahByNik = async (
     res.status(500).json({ message: "internal server error" });
   }
 };
+
+export const deleteNasabahByNik = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const { nik } = req.query;
+
+  if (!nik) {
+    res.status(400).json({
+      statusCode: res.statusCode,
+      message: "The 'nik' parameter is required.",
+    });
+    return;
+  }
+
+  try {
+    const data = await prisma.nasabah.delete({
+      where: { nik: nik.toString() },
+    });
+
+    res.status(200).json({
+      statusCode: res.statusCode,
+      message: "Success deleted data",
+      data,
+    });
+  } catch (error) {
+    console.log("Error while deleting nasabah data: ", error);
+    res
+      .status(500)
+      .json({ statusCode: res.statusCode, message: "internal server error" });
+  }
+};
