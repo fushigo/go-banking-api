@@ -6,6 +6,7 @@ import {
   getAllRekening,
   getRekeningById,
   getRekeningByNomorRekening,
+  tarikTunai,
   transferRekening,
   updateRekening,
 } from "../controllers/rekeningController";
@@ -27,6 +28,9 @@ export default function rekeningRoutes() {
 
   // TRANSFER
   router.post("/transfer", transferRekening);
+
+  // TARIK TUNAI
+  router.post("/tarik-tunai", tarikTunai);
 
   return router;
 }
