@@ -1,6 +1,7 @@
 import {
   createNasabah,
   deleteNasabah,
+  deleteNasabahByNik,
   getAllNasabah,
   getNasabahById,
   getNasabahByNik,
@@ -19,6 +20,7 @@ export default function nasabahRoutes() {
 
   //GET BY NIK
   router.get("/nik/:nik", getNasabahByNik);
+  router.delete("/nik/:nik", deleteNasabahByNik);
 
   return router;
 }
