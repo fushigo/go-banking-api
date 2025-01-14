@@ -135,7 +135,7 @@ export const deleteNasabahByNik = async (
   req: Request,
   res: Response
 ): Promise<void> => {
-  const { nik } = req.query;
+  const { nik } = req.params;
 
   if (!nik) {
     res.status(400).json({
