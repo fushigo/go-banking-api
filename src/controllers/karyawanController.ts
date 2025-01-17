@@ -57,10 +57,18 @@ export const createKaryawan = async (
       },
     });
 
-    res.status(201).json({ message: "Success created data", data });
+    res
+      .status(201)
+      .json({
+        statusCode: res.statusCode,
+        message: "Success created data",
+        data,
+      });
   } catch (error) {
     console.log("Error while create karyawan data : ", error);
-    res.status(500).json({ message: "internal server error" });
+    res
+      .status(500)
+      .json({ statusCode: res.statusCode, message: "internal server error" });
   }
 };
 
