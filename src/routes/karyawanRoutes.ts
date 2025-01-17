@@ -14,7 +14,7 @@ export default function karyawanRoutes() {
   router.get("/", getAllKaryawan);
   router.get("/:id", getKaryawanById);
   router.post("/", createKaryawan);
-  router.patch("/nmkaryawan/:nomor", updateKaryawanByNomorKaryawan);
+  router.patch("/nokrywn/:nokrywn", updateKaryawanByNomorKaryawan);
   router.patch("/:id", updateKaryawan);
   router.delete("/:id", deleteKaryawan);
 
