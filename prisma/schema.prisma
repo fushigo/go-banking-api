@@ -9,7 +9,7 @@ datasource db {
 
 model Karyawan {
     id_karyawan Int @id @default(autoincrement())
-    nomorKaryawan Int @unique
+    nomorKaryawan String @unique
     namaKaryawan String
     username String
     password String

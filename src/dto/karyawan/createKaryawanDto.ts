@@ -1,5 +1,5 @@
 export class CreateKaryawanDto {
-  nomorKaryawan!: number;
+  nomorKaryawan!: string;
   namaKaryawan!: string;
   username!: string;
   password!: string;
