@@ -100,10 +100,10 @@ export const updateKaryawanByNomorKaryawan = async (
   res: Response
 ): Promise<void> => {
   const dto: UpdateKaryawanDto = req.body;
-  const { nm } = req.params;
+  const { nomor } = req.params;
   try {
     const data = await prisma.karyawan.update({
-      where: { nomorKaryawan: nm },
+      where: { nomorKaryawan: nomor },
       data: {
         namaKaryawan: dto.namaKaryawan,
         nomorKaryawan: dto.nomorKaryawan,
