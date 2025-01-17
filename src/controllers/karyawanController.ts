@@ -50,10 +50,10 @@ export const createKaryawan = async (
   try {
     const data = await prisma.karyawan.create({
       data: {
-        namaKaryawan: dto.namaKaryawan,
-        nomorKaryawan: dto.nomorKaryawan,
-        password: dto.password,
-        username: dto.username,
+        namaKaryawan: dto.namaKaryawan!,
+        nomorKaryawan: dto.nomorKaryawan!,
+        password: dto.password!,
+        username: dto.username!,
       },
     });
 

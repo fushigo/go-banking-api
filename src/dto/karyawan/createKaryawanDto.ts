@@ -1,7 +1,7 @@
 export class CreateKaryawanDto {
-  nomorKaryawan!: string;
-  namaKaryawan!: string;
-  username!: string;
-  password!: string;
-  role!: "SuperAdmin" | "Admin" | "Karyawan";
+  nomorKaryawan!: string | undefined;
+  namaKaryawan!: string | undefined;
+  username!: string | undefined;
+  password!: string | undefined;
+  role!: "SuperAdmin" | "Admin" | "Karyawan" | undefined;
 }
