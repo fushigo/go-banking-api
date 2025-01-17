@@ -109,6 +109,7 @@ export const updateKaryawanByNomorKaryawan = async (
         nomorKaryawan: dto.nomorKaryawan,
         password: dto.password,
         username: dto.username,
+        role: dto.role,
       },
     });
 
