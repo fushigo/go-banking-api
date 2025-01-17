@@ -57,13 +57,11 @@ export const createKaryawan = async (
       },
     });
 
-    res
-      .status(201)
-      .json({
-        statusCode: res.statusCode,
-        message: "Success created data",
-        data,
-      });
+    res.status(201).json({
+      statusCode: res.statusCode,
+      message: "Success created data",
+      data,
+    });
   } catch (error) {
     console.log("Error while create karyawan data : ", error);
     res
@@ -82,6 +80,30 @@ export const updateKaryawan = async (
   try {
     const data = await prisma.karyawan.update({
       where: { id_karyawan: Number(id) },
+      data: {
+        namaKaryawan: dto.namaKaryawan,
+        nomorKaryawan: dto.nomorKaryawan,
+        password: dto.password,
+        username: dto.username,
+      },
+    });
+
+    res.status(200).json({ message: "Success updated data", data });
+  } catch (error) {
+    console.log("Error while updating karyawan data: ", error);
+    res.status(500).json({ message: "internal server error" });
+  }
+};
+
+export const updateKaryawanByNomorKaryawan = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const dto: UpdateKaryawanDto = req.body;
+  const { nm } = req.params;
+  try {
+    const data = await prisma.karyawan.update({
+      where: { nomorKaryawan: nm },
       data: {
         namaKaryawan: dto.namaKaryawan,
         nomorKaryawan: dto.nomorKaryawan,

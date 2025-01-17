@@ -5,6 +5,7 @@ import {
   getAllKaryawan,
   getKaryawanById,
   updateKaryawan,
+  updateKaryawanByNomorKaryawan,
 } from "../controllers/karyawanController";
 
 export default function karyawanRoutes() {
@@ -14,6 +15,7 @@ export default function karyawanRoutes() {
   router.get(":/id", getKaryawanById);
   router.post("/", createKaryawan);
   router.patch("/:id", updateKaryawan);
+  router.patch("/nmkaryawan/:nm", updateKaryawanByNomorKaryawan);
   router.delete("/:id", deleteKaryawan);
 
   return router;
