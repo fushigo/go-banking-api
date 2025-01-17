@@ -113,10 +113,16 @@ export const updateKaryawanByNomorKaryawan = async (
       },
     });
 
-    res.status(200).json({ message: "Success updated data", data });
+    res.status(200).json({
+      statusCode: res.statusCode,
+      message: "Success updated data",
+      data,
+    });
   } catch (error) {
     console.log("Error while updating karyawan data: ", error);
-    res.status(500).json({ message: "internal server error" });
+    res
+      .status(500)
+      .json({ statusCode: res.statusCode, message: "internal server error" });
   }
 };
 
