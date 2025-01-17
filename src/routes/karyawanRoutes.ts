@@ -2,6 +2,7 @@ import express from "express";
 import {
   createKaryawan,
   deleteKaryawan,
+  deleteKaryawanByNomorKaryawan,
   getAllKaryawan,
   getKaryawanById,
   updateKaryawan,
@@ -16,6 +17,7 @@ export default function karyawanRoutes() {
   router.post("/", createKaryawan);
   router.patch("/nokrywn/:nokrywn", updateKaryawanByNomorKaryawan);
   router.patch("/:id", updateKaryawan);
+  router.delete("/nokrywn/:nokrywn", deleteKaryawanByNomorKaryawan);
   router.delete("/:id", deleteKaryawan);
 
   return router;

@@ -3,12 +3,14 @@ import {
   createRekening,
   createRekeningIncUser,
   deleteRekening,
+  deleteRekeningByNomorRekening,
   getAllRekening,
   getRekeningById,
   getRekeningByNomorRekening,
   tarikTunai,
   transferRekening,
   updateRekening,
+  updateRekeningByNomorRekening,
 } from "../controllers/rekeningController";
 
 export default function rekeningRoutes() {
@@ -17,7 +19,9 @@ export default function rekeningRoutes() {
   router.get("/", getAllRekening);
   router.get("/:id", getRekeningById);
   router.post("/", createRekening);
+  router.patch("/norek/:norek", updateRekeningByNomorRekening);
   router.patch("/:id", updateRekening);
+  router.delete("/norek/:norek", deleteRekeningByNomorRekening);
   router.delete("/:id", deleteRekening);
 
   // GET BY NOREK

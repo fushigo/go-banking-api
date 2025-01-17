@@ -95,6 +95,39 @@ export const updateRekening = async (
   }
 };
 
+export const updateRekeningByNomorRekening = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const dto: UpdateRekeningDto = req.body;
+  const { norek } = req.params;
+
+  try {
+    const data = await prisma.rekening.update({
+      where: { nomorRekening: norek },
+      data: {
+        nomorRekening: dto.nomorRekening,
+        jenisTabungan: dto.jenisTabungan,
+        totalDana: dto.totalDana,
+        bonusBunga: dto.bonusBunga,
+        id_nasabah: dto.idNasabah,
+        pin: Number(dto.pin),
+      },
+    });
+
+    res.status(200).json({
+      statusCode: res.statusCode,
+      message: "Success updated data",
+      data,
+    });
+  } catch (error) {
+    console.log("Error while updating rekening data: ", error);
+    res
+      .status(500)
+      .json({ statusCode: res.statusCode, message: "internal server error" });
+  }
+};
+
 export const deleteRekening = async (
   req: Request,
   res: Response
@@ -110,6 +143,26 @@ export const deleteRekening = async (
   } catch (error) {
     console.log("Error while deleting rekening data: ", error);
     res.status(500).json({ message: "internal server error" });
+  }
+};
+
+export const deleteRekeningByNomorRekening = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const { norek } = req.params;
+
+  try {
+    const data = await prisma.rekening.delete({
+      where: { nomorRekening: norek },
+    });
+
+    res.status(200).json({ message: "Success deleted data", data });
+  } catch (error) {
+    console.log("Error while deleting rekening data: ", error);
+    res
+      .status(500)
+      .json({ statusCode: res.statusCode, message: "internal server error" });
   }
 };
 

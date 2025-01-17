@@ -143,3 +143,27 @@ export const deleteKaryawan = async (
     res.status(500).json({ message: "internal server error" });
   }
 };
+
+export const deleteKaryawanByNomorKaryawan = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const { nokrywn } = req.params;
+
+  try {
+    const data = await prisma.karyawan.delete({
+      where: { nomorKaryawan: nokrywn },
+    });
+
+    res.status(200).json({
+      statusCode: res.statusCode,
+      message: "Success deleted data",
+      data,
+    });
+  } catch (error) {
+    console.log("Error while deleting karyawan data: ", error);
+    res
+      .status(500)
+      .json({ statusCode: res.statusCode, message: "internal server error" });
+  }
+};
