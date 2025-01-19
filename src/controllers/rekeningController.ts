@@ -153,6 +153,18 @@ export const deleteRekeningByNomorRekening = async (
   const { norek } = req.params;
 
   try {
+    const rekening = await prisma.rekening.findUnique({
+      where: { nomorRekening: norek },
+    });
+
+    if (!rekening) {
+      res.status(400).json({
+        statusCode: res.statusCode,
+        message: "rekening data not found",
+      });
+      return;
+    }
+
     const data = await prisma.rekening.delete({
       where: { nomorRekening: norek },
     });
