@@ -169,7 +169,13 @@ export const deleteRekeningByNomorRekening = async (
       where: { nomorRekening: norek },
     });
 
-    res.status(200).json({ message: "Success deleted data", data });
+    res
+      .status(200)
+      .json({
+        statusCode: res.statusCode,
+        message: "Success deleted data",
+        data,
+      });
   } catch (error) {
     console.log("Error while deleting rekening data: ", error);
     res
