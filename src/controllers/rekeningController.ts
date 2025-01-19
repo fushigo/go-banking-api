@@ -357,3 +357,53 @@ export const tarikTunai = async (
       .json({ statusCode: res.statusCode, message: "Internal server error" });
   }
 };
+
+// Menambah tabungan
+export const addSavingsFunds = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const { nomorRekening, nominal, pinRekening } = req.body;
+
+  if (!nomorRekening || !nominal || !pinRekening) {
+    res.status(400).json({ statusCode: 400, message: "Invalid input" });
+    return;
+  }
+
+  try {
+    const rekening = await prisma.rekening.findUnique({
+      where: { nomorRekening: nomorRekening! },
+    });
+
+    if (!rekening) {
+      res.status(404).json({
+        statusCode: res.statusCode,
+        message: "Rekening data is not found",
+      });
+      return;
+    }
+
+    if (Number(pinRekening) !== rekening.pin) {
+      res.status(401).json({
+        statusCode: res.statusCode,
+        message: "Unauthorize: PIN salah",
+      });
+      return;
+    }
+
+    const transfer = await prisma.rekening.update({
+      where: { nomorRekening: nomorRekening! },
+      data: { totalDana: Number(rekening.totalDana) + Number(nominal) },
+    });
+
+    if (transfer) {
+      res.status(200).json({
+        statusCode: res.statusCode,
+        message: "Cash withdrawal successful",
+      });
+    }
+  } catch (error) {
+    console.log("Error while processing addSavingsFunds: ", error);
+    res.status(500).json({ statusCode: 500, message: "Internal server error" });
+  }
+};

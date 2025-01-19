@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  addSavingsFunds,
   createRekening,
   createRekeningIncUser,
   deleteRekening,
@@ -35,6 +36,9 @@ export default function rekeningRoutes() {
 
   // TARIK TUNAI
   router.post("/tarik-tunai", tarikTunai);
+
+  // TAMBAH TABUNGAN
+  router.post("/saving-funds", addSavingsFunds);
 
   return router;
 }
