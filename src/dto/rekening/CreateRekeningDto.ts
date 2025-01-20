@@ -4,5 +4,5 @@ export class CreateRekeningDto {
   totalDana!: number;
   bonusBunga!: number;
   idNasabah?: number;
-  pin!: number;
+  pin?: number;
 }
