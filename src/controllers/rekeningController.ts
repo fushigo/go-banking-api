@@ -103,16 +103,21 @@ export const updateRekeningByNomorRekening = async (
   const { norek } = req.params;
 
   try {
+    const updateData: any = {
+      nomorRekening: dto.nomorRekening,
+      jenisTabungan: dto.jenisTabungan,
+      totalDana: dto.totalDana,
+      bonusBunga: dto.bonusBunga,
+      id_nasabah: dto.idNasabah,
+    };
+
+    if (dto.pin !== undefined && dto.pin !== null) {
+      updateData.pin = Number(dto.pin);
+    }
+
     const data = await prisma.rekening.update({
       where: { nomorRekening: norek },
-      data: {
-        nomorRekening: dto.nomorRekening,
-        jenisTabungan: dto.jenisTabungan,
-        totalDana: dto.totalDana,
-        bonusBunga: dto.bonusBunga,
-        id_nasabah: dto.idNasabah,
-        pin: Number(dto.pin),
-      },
+      data: updateData,
     });
 
     res.status(200).json({
