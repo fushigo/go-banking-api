@@ -111,7 +111,7 @@ export const updateRekeningByNomorRekening = async (
         totalDana: dto.totalDana,
         bonusBunga: dto.bonusBunga,
         id_nasabah: dto.idNasabah,
-        pin: dto.pin,
+        pin: Number(dto.pin),
       },
     });
 
